@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { filtersState } from './filters.state';
 import './header.scss';
@@ -6,7 +6,9 @@ import { parseHar } from '../har-management/har-import';
 import { harState } from '../har-management/har.state';
 
 export const HeaderComponent: FC = () => {
-  const [filters, setFilters] = useRecoilState(filtersState);
+  const [queryValue, setQueryValue] = useState('');
+
+  const [, setFilters] = useRecoilState(filtersState);
   const [, setHar] = useRecoilState(harState);
   const [hasError, setHasError] = useState(false);
 
@@ -24,6 +26,17 @@ export const HeaderComponent: FC = () => {
     }
   };
 
+  // debouncing query
+  useEffect(() => {
+    const delayInputTimeoutId = setTimeout(() => {
+      setFilters({
+        query: queryValue,
+      });
+    }, 500);
+
+    return () => clearTimeout(delayInputTimeoutId);
+  }, [queryValue, setFilters]);
+
   return (
     <header>
       <div>
@@ -33,9 +46,9 @@ export const HeaderComponent: FC = () => {
         />
         <input
           type="text"
-          value={filters.query}
+          value={queryValue}
           onChange={(e) => {
-            setFilters({ ...filters, query: e.target.value });
+            setQueryValue(e.target.value);
           }}
         />
       </div>
