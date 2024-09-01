@@ -8,7 +8,7 @@ import { harState } from '../har-management/har.state';
 export const HeaderComponent: FC = () => {
   const [queryValue, setQueryValue] = useState('');
 
-  const [, setFilters] = useRecoilState(filtersState);
+  const [filters, setFilters] = useRecoilState(filtersState);
   const [, setHar] = useRecoilState(harState);
   const [hasError, setHasError] = useState(false);
 
@@ -30,12 +30,13 @@ export const HeaderComponent: FC = () => {
   useEffect(() => {
     const delayInputTimeoutId = setTimeout(() => {
       setFilters({
+        ...filters,
         query: queryValue,
       });
     }, 500);
 
     return () => clearTimeout(delayInputTimeoutId);
-  }, [queryValue, setFilters]);
+  }, [filters, queryValue, setFilters]);
 
   return (
     <header>
@@ -51,6 +52,19 @@ export const HeaderComponent: FC = () => {
             setQueryValue(e.target.value);
           }}
         />
+        <label>
+          Errors only:{' '}
+          <input
+            type="checkbox"
+            checked={filters.errorsOnly}
+            onChange={(e) => {
+              setFilters({
+                ...filters,
+                errorsOnly: e.target.checked,
+              });
+            }}
+          />
+        </label>
       </div>
       {hasError && (
         <div>

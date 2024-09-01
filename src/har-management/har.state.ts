@@ -36,8 +36,24 @@ export const filteredHarEntries = selector({
             return null;
         }
 
-        return har.log.entries.filter(entry => !filters.query || entry.request.url.includes(filters.query)
-        );
+        return har.log.entries
+            .filter(entry => !filters.query || entry.request.url.includes(filters.query))
+            .filter(entry => !filters.errorsOnly || entry.response.status >= 400);
+    }
+})
+
+
+export const selectedHarEntry = selector({
+    key: 'selectedHarEntry',
+    get: ({ get }) => {
+        const har = get(harState);
+        const selectedId = get(selectedEntryIdState);
+
+        if (!har || !selectedId) {
+            return null;
+        }
+
+        return har.log.entries.find(entry => entry.id === selectedId);
     }
 })
 

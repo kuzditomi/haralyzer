@@ -1,12 +1,22 @@
 .entry {
-    border: 1px solid grey;
-    overflow: hidden;
-    text-wrap: nowrap;
-    padding: 3px;
-    cursor: pointer;
+  border: 1px solid grey;
+  overflow: hidden;
+  text-wrap: nowrap;
+  padding: 3px 5px;
+  cursor: pointer;
 
-    &.selected {
-        background-color: lightgreen;
-    }
+  display: flex;
+  flex-direction: row;
+
+  &.selected::before {
+    content: '';
+    display: block;
+    min-width: 10px;
+    margin-right: 5px;
+    background-color: blue;
+  }
+
+  &.error {
+    background-color: lightcoral;
+  }
 }
-

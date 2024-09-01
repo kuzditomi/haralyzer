@@ -12,13 +12,16 @@ export const EntryComponent: FC<{ entry: EntryWithId }> = ({ entry }) => {
 
   return (
     <div
-      className={classNames('entry', { selected: selectedEntryId == entry.id })}
+      className={classNames('entry', {
+        selected: selectedEntryId == entry.id,
+        error: entry.response.status >= 400,
+      })}
       title={entry.request.url}
       onClick={() => {
         setSelectedEntryId(entry.id);
       }}
     >
-      {entry.request.url}
+      <div>{entry.request.url}</div>
     </div>
   );
 };
