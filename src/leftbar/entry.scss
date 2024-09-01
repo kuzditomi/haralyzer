@@ -1,0 +1,12 @@
+.entry {
+    border: 1px solid grey;
+    overflow: hidden;
+    text-wrap: nowrap;
+    padding: 3px;
+    cursor: pointer;
+
+    &.selected {
+        background-color: lightgreen;
+    }
+}
+
