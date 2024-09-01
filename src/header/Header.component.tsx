@@ -33,7 +33,7 @@ export const HeaderComponent: FC = () => {
         ...filters,
         query: queryValue,
       });
-    }, 500);
+    }, 300);
 
     return () => clearTimeout(delayInputTimeoutId);
   }, [filters, queryValue, setFilters]);
@@ -61,6 +61,32 @@ export const HeaderComponent: FC = () => {
               setFilters({
                 ...filters,
                 errorsOnly: e.target.checked,
+              });
+            }}
+          />
+        </label>
+        <label>
+          Relevant only:{' '}
+          <input
+            type="checkbox"
+            checked={filters.relevantOnly}
+            onChange={(e) => {
+              setFilters({
+                ...filters,
+                relevantOnly: e.target.checked,
+              });
+            }}
+          />
+        </label>
+        <label>
+          XHR only:{' '}
+          <input
+            type="checkbox"
+            checked={filters.xhrOnly}
+            onChange={(e) => {
+              setFilters({
+                ...filters,
+                xhrOnly: e.target.checked,
               });
             }}
           />

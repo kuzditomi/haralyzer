@@ -1,6 +1,7 @@
 import { atom, selector } from "recoil";
 import { HarWithIds } from "./har-import";
 import { filtersState } from "../header/filters.state";
+import { isEntryRelevant } from "./filter";
 
 export const harState = atom({
     key: 'harState',
@@ -11,7 +12,6 @@ export const selectedEntryIdState = atom({
     key: 'selectedEntryStateState',
     default: null as number | null
 });
-
 
 export const harEntries = selector({
     key: 'harEntries',
@@ -38,10 +38,11 @@ export const filteredHarEntries = selector({
 
         return har.log.entries
             .filter(entry => !filters.query || entry.request.url.includes(filters.query))
-            .filter(entry => !filters.errorsOnly || entry.response.status >= 400);
+            .filter(entry => !filters.errorsOnly || entry.response.status >= 400)
+            .filter(entry => !filters.xhrOnly || entry._resourceType == "xhr")
+            .filter(entry => !filters.relevantOnly || isEntryRelevant(entry));
     }
 })
-
 
 export const selectedHarEntry = selector({
     key: 'selectedHarEntry',

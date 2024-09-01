@@ -4,6 +4,8 @@ export const filtersState = atom({
   key: 'filtersState',
   default: {
     query: "",
-    errorsOnly: false
+    errorsOnly: false,
+    xhrOnly: true,
+    relevantOnly: true
   }
 });
