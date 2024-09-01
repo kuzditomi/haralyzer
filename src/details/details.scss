@@ -1,0 +1,58 @@
+.details {
+  margin: 10px;
+  display: flex;
+  gap: 10px;
+  overflow: hidden;
+  width: 100%;
+
+  .request {
+    width: 50%;
+    overflow: hidden;
+
+    ul {
+      padding: 0;
+
+      li {
+        list-style: none;
+        border-bottom: 1px solid grey;
+        padding: 2px;
+        display: flex;
+        flex-direction: row;
+
+        label {
+          display: inline-block;
+          font-weight: bold;
+          min-width: 200px;
+        }
+
+        p {
+          margin: 0;
+          text-wrap: wrap;
+          overflow: hidden;
+        }
+      }
+    }
+  }
+
+  .response {
+    width: 50%;
+    overflow: hidden;
+
+    p.success {
+      background-color: lightgreen;
+    }
+    p.warn {
+      background-color: lightgoldenrodyellow;
+    }
+    p.error {
+      background-color: lightcoral;
+    }
+
+    pre {
+      padding: 10px;
+      background-color: lightblue;
+      line-height: 140%;
+      font-size: 110%;
+    }
+  }
+}

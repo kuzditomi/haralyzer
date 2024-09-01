@@ -8,15 +8,11 @@
   display: flex;
   flex-direction: row;
 
-  &.selected::before {
-    content: '';
-    display: block;
-    min-width: 10px;
-    margin-right: 5px;
-    background-color: blue;
+  &.selected {
+    background-color: lightblue;
   }
 
   &.error {
-    background-color: lightcoral;
+    color: red;
   }
 }
