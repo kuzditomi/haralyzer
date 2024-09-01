@@ -1,0 +1,10 @@
+html,
+body,
+#root {
+  margin: 0;
+  height: 100%;
+}
+
+body * {
+  box-sizing: border-box;
+}
